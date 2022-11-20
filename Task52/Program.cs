@@ -34,5 +34,39 @@ void PrintMatrix(int[,] matrix)
     }
 }
 
+double[] ArithmeticMean(int[,] matrix)
+{
+    int size = matrix.GetLength(1);
+    double[]array = new double[size];
+    double num =0;
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        for (int i = 0; i < matrix.GetLength(0); i++)
+        {
+           num = matrix[i,j];
+           array[size] = num+num;
+           size++;
+        }
+       
+    }
+    return array;
+}
+
+void PrintArray(double[] array)
+{
+    //Console.Write("[");
+    for (int i = 0; i < array.Length; i++)
+    {
+        {
+            if (i < array.Length - 1) Console.Write($"{array[i]}, ");
+            else Console.Write($"{array[i]}");
+        }
+    }
+    //Console.Write("] ");
+}
+
 int[,] array2D = CreateMatrixRndInt(3, 4, -100, 100);
 PrintMatrix(array2D);
+
+double[]array = ArithmeticMean(array2D);
+PrintArray(array);
