@@ -5,6 +5,8 @@
 // 8 4 2 4
 // Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
+//МЕТОДЫ
+//метода создает массив из произвольных чисел.
 int[,] CreateMatrixRndInt(int rows, int columns, int min, int max)
 {
     int[,] matrix = new int[rows, columns]; // 0, 1
@@ -20,6 +22,7 @@ int[,] CreateMatrixRndInt(int rows, int columns, int min, int max)
     return matrix;
 }
 
+//метод печатает массив.
 void PrintMatrix(int[,] matrix)
 {
     for (int i = 0; i < matrix.GetLength(0); i++)
@@ -27,31 +30,38 @@ void PrintMatrix(int[,] matrix)
         Console.Write("|");
         for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            if (j < matrix.GetLength(1) - 1) Console.Write($"{matrix[i, j], 5} | ");
-            else Console.Write($"{matrix[i, j], 5}");
+            if (j < matrix.GetLength(1) - 1) Console.Write($"{matrix[i, j],5} | ");
+            else Console.Write($"{matrix[i, j],5}");
         }
         Console.WriteLine("|");
     }
 }
 
+//метод расчитывет среднее арифметическое столбцов двухмерного массива и результат помещает в одномерный массив.
 double[] ArithmeticMean(int[,] matrix)
 {
-    int size = matrix.GetLength(1);
-    double[]array = new double[size];
-    double num =0;
+    double[] arithmeticMean = new double[matrix.GetLength(1)];
+
     for (int j = 0; j < matrix.GetLength(1); j++)
     {
+        double sum = default;
+        double num;
+        double resultArith;
         for (int i = 0; i < matrix.GetLength(0); i++)
         {
-           num = matrix[i,j];
-           array[size] = num+num;
-           size++;
+            num = matrix[i, j];
+            //Console.Write($"{sum}, ");
+            sum+= num;
         }
-       
+        resultArith = sum / matrix.GetLength(0);
+        resultArith = Math.Round(resultArith, 1);
+        arithmeticMean[j] = resultArith;
     }
-    return array;
+
+    return arithmeticMean;
 }
 
+//метод печатает одномерный массив.
 void PrintArray(double[] array)
 {
     //Console.Write("[");
@@ -65,8 +75,10 @@ void PrintArray(double[] array)
     //Console.Write("] ");
 }
 
-int[,] array2D = CreateMatrixRndInt(3, 4, -100, 100);
+//ПРОГРАММА
+int[,] array2D = CreateMatrixRndInt(3, 4, 1, 10);
 PrintMatrix(array2D);
 
-double[]array = ArithmeticMean(array2D);
+double[] array = ArithmeticMean(array2D);
+Console.Write($"Среднее арифметическое каждого столбца: ");
 PrintArray(array);
